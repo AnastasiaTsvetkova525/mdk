@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Настоящий хлеб</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #111;
+      background: #eeeeee;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Верхняя картинка */
+    .hero {
+      width: 100%;
+      height: 95px;
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .hero h2 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      z-index: 2;
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 42px;
+      font-weight: 700;
+      white-space: nowrap;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Кнопка Зарегистрироваться в верхнем правом углу */
+    .btn-reg {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      z-index: 10;
+      background: #d9c88f;
+      color: #111;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: Arial, sans-serif;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.2s ease;
+    }
+
+    .btn-reg:hover {
+      background: #c5b47b;
+    }
+
+    .main {
+      background: #eeeeee;
+      padding: 18px 20px 60px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Заголовок */
+    .main-title {
+      margin: 0 auto 18px;
+      font-size: 44px;
+      line-height: 1.05;
+      font-weight: 700;
+    }
+
+    .description {
+      max-width: 460px;
+      margin: 0 auto 35px;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    /* Меню */
+    .section-title {
+      margin: 20px 0 25px;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 45px;
+      align-items: start;
+      max-width: 760px;
+      margin: 0 auto 80px;
+    }
+
+    .menu-item img {
+      width: 100%;
+      max-width: 260px;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 18px;
+    }
+
+    .menu-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: lowercase;
+    }
+
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #d9c88f;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Отзывы */
+    .reviews {
+      margin-top: 20px;
+    }
+
+    .reviews-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 55px;
+      position: relative;
+      margin-bottom: 75px;
+    }
+
+    .review-card {
+      width: 260px;
+      min-height: 155px;
+      padding: 25px 22px 18px;
+      border-radius: 8px;
+      background: linear-gradient(to bottom, #ffffff 0%, #d8cb8f 100%);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.15;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .review-author {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .review-author img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #d8cb8f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Подвал */
+    .footer {
+      background: #eee5cc;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.9;
+    }
+
+    .footer nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Версия для телефона */
+    @media (max-width: 600px) {
+      .hero {
+        height: 78px;
+      }
+
+      .hero h2 {
+        font-size: 24px; /* Немного уменьшили, чтобы кнопка не накладывалась */
+      }
+
+      .btn-reg {
+        top: 10px;
+        right: 15px;
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .main {
+        padding: 10px 15px 45px;
+      }
+
+      .main-title {
+        font-size: 30px;
+        line-height: 1.05;
+        margin-bottom: 12px;
+      }
+
+      .description {
+        max-width: 300px;
+        font-size: 13px;
+        margin-bottom: 28px;
+      }
+
+      .section-title {
+        font-size: 20px;
+        margin: 15px 0 18px;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 35px;
+        max-width: 310px;
+        margin-bottom: 65px;
+      }
+
+      .menu-item:nth-child(3) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 150px;
+      }
+
+      .menu-item img {
+        max-width: 150px;
+        height: 90px;
+        margin-bottom: 12px;
+      }
+
+      .menu-label {
+        font-size: 12px;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 11px;
+        height: 11px;
+      }
+
+      .reviews-wrap {
+        gap: 28px;
+        margin-bottom: 45px;
+      }
+
+      .review-card {
+        width: 142px;
+        min-height: 118px;
+        padding: 16px 12px 10px;
+        font-size: 9px;
+        border-radius: 6px;
+      }
+
+      .review-author {
+        margin-top: 10px;
+        gap: 6px;
+        font-size: 8px;
+      }
+
+      .review-author img {
+        width: 25px;
+        height: 25px;
+      }
+
+      .arrow {
+        position: absolute;
+        right: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+        font-size: 18px;
+      }
+
+      .footer {
+        padding: 20px 10px;
+        font-size: 9px;
+        line-height: 1.8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Верхний баннер -->
+  <header class="hero">
+    <img src="1.jpg" alt="Свежий хлеб">
+    <h2>Вкусно. Горячо. натурально</h2>
+    <!-- Кнопка регистрации -->
+    <a href="регист.html" class="btn-reg">Зарегистрироваться</a>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <h1 class="main-title">
+        <span>НАШИ Современные</span><br>
+        <span>пекарни в Москве</span>
+      </h1>
+
+      <p class="description">
+        Сеть современных пекарен в Москве. Мы используем натуральные ингредиенты
+        и традиционные рецепты, чтобы печь вкусный и полезный хлеб. В наших
+        пекарнях вы найдете разнообразие свежей выпечки, приготовленной с любовью
+        и уважением к традициям.
+      </p>
+
+      <section class="menu">
+        <h2 class="section-title"><a href="меню.html">МЕНЮ </a></h2>
+
+        <div class="menu-grid">
+
+          <div class="menu-item">
+            <img src="90.jpg" alt="Выпечка">
+            <div class="menu-label">
+              <span class="dot"></span>
+              <span>выпечка</span>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <img src="11.jpg" alt="Холодные напитки">
+            <div class="menu-label">
+              <span class="dot"></span>
+              <span>холодные напитки</span>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <img src="7.jpg" alt="Горячие напитки">
+            <div class="menu-label">
+              <span class="dot"></span>
+              <span>горячие напитки</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="reviews">
+        <h2 class="section-title">ОТЗЫВЫ</h2>
+
+        <div class="reviews-wrap">
+
+          <article class="review-card">
+            <p>
+              хлеб настоящий фаворит в нашей семье! Приятное на вкус и всегда
+              свежее изделие привезли и вкусом. Вы настоящие мастера своего дела!
+            </p>
+
+            <div class="review-author">
+              <img src="10.jpg" alt="Диана Вебер">
+              <span>Диана Вебер</span>
+            </div>
+          </article>
+
+          <article class="review-card">
+            <p>
+              Потрясающее место! Выпечка всегда свежая, горячая и невероятно
+              вкусная. Отменный плюс за аромат — мимо пройти просто невозможно.
+            </p>
+            <div class="review-author">
+              <img src="11.jpg" alt="Алексей Иванов">
+              <span>Алексей Иванов</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Подвал сайта со ссылкой на Личный Кабинет -->
+  <footer class="footer">
+    <nav>
+      <a href="личный кабинет.html">Личный кабинет</a>
+    </nav>
+    <nav>
+      <a href="меню.html">Меню</a>
+    </nav>
+     <nav>
+     +7 911 188 95 35
+    </nav>
+
+  </footer>
+
+</body>
+</html>
